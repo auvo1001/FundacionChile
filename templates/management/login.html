@@ -1,0 +1,17 @@
+{% extends 'management/base.html' %}{% load static %}
+{% block title %}Log in{% endblock %}
+{% block content %}
+    <form class="form-signin" role="form" method="post" action="/management/login/">
+        <h1 class="form-signin-heading">Login</h1>
+			{% csrf_token %}
+			{% if bad_details %}
+			Your username and/or password were in correct
+			{% elif disabled_account %}
+			Your account was disabled
+			{% endif %}
+        <input type="text" class="form-control" placeholder="User Name" name="username" value="" size="50" required autofocus />
+        <input type="password" class="form-control" placeholder="Password" name="password" value="" size="50" required  />
+        <br />
+        <button class="btn btn-lg btn-primary btn-block" value="submit">Sign in</button>
+    </form>
+{% endblock %}

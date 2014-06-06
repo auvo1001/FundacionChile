@@ -1,0 +1,13 @@
+{% extends 'management/base.html' %}
+        {%block content %}
+
+            {% if user.is_authenticated %}
+                {% include 'management/dashboard.html' %}
+
+             {% else %}
+
+                {% include 'management/login.html' %}
+
+            {% endif %}
+
+        {% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'management/base.html' %}
+        {%block content %}
+
+
+<form action="/management/organization_create_form/" role="form" method="post">{% csrf_token %}
+    <label for="name">Nombre de la organización: </label>
+        <input type="text" class="form-control" placeholder="Nombre de la organización" name="name" value="" size="100" required autofocus />
+        <br />
+
+    <label for="address1">Línea de dirección 1: </label>
+        <input type="text" class="form-control" placeholder="Línea de dirección 1" name="address1" value="" size="100" required autofocus />
+        <br />
+
+    <label for="address2">Línea de dirección 2: </label>
+        <input type="text" class="form-control" placeholder="Línea de dirección 2" name="address2" value="" size="100" required autofocus />
+        <br />
+
+    <label for="city">Ciudad: </label>
+        <input type="text" class="form-control" placeholder="Ciudad" name="city" value="" size="100" required autofocus />
+        <br />
+
+    <label for="state_province">Estado/ Provincia: </label>
+        <input type="text" class="form-control" placeholder="Estado/ Provincia" name="state_province" value="" size="100" required autofocus />
+        <br />
+
+    <label for="url">URL: </label>
+        <input type="text" class="form-control" placeholder="URL" name="url" value="" size="100" required autofocus />
+        <br />
+
+    <label for="country">País: </label> {{ form.country }}
+
+        <br />
+
+    <input type="submit" class="btn btn-primary" value="Submit" />
+</form>
+
+
+        {% endblock %}

@@ -1,0 +1,14 @@
+
+{% extends 'management/base.html' %}
+    {%block content %}
+        <div class="bg-success">
+
+        <h1>{{ organization.name }}</h1>
+        <p>Línea de dirección 1: {{ organization.address1 }}</p>
+        <p>Línea de dirección 2: {{ organization.address2 }}</p>
+        <p>Ciudad: {{ organization.city }}</p>
+        <p>Estado/ Provincia: {{ organization.state_province }}</p>
+        <p>URL: {{organization.url }}</p>
+        <p>País: {{organization.country }}</p>
+        </div>
+    {% endblock %}
