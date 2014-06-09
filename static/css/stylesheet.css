@@ -11,3 +11,28 @@ body {
     color: inherit;
     background-color: #eee;
 }
+
+
+
+.profile {
+    background-color:#eee;
+    border-radius: 6px;
+    padding: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.profile h1 {
+text-align: center;
+}
+.rep {
+    background-color:#eee;
+    border-radius: 6px;
+    padding: 15px;
+}
+
+.trip {
+    background-color:#eee;
+    border-radius: 6px;
+    padding: 15px;
+}

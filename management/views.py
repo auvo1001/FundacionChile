@@ -3,8 +3,8 @@ from django.shortcuts import render_to_response, redirect, render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.views.generic.detail import DetailView
-from management.models import Trip, Organization
-from management.forms import OrganizationForm
+from management.models import Trip, Organization, Representative
+from management.forms import OrganizationForm, TripForm
 from django.core.urlresolvers import reverse
 
 def index(request):
@@ -78,24 +78,21 @@ def create_organization(request):
         context_dict['form']=form
     return render_to_response('management/organization_create_form.html',context_dict,context)
 
-def create_trip(request,organization_name):
+def create_trip(request,organization_name_url):
     context = RequestContext(request)
-
-    organization_name = decode_url( organization_name)
+    organization_name = decode_url(organization_name_url)
     if request.method =='POST':
         form = TripForm(request.POST)
 
         if form.is_valid():
-            page = form.save(commit = False)
+            trip = form.save(commit = False)
             try:
-                org = Organization.objects.get(name=organization_name)
-                trip.organization = org
+                organization = Organization.objects.get(name=organization_name)
+                trip.org = organization
             except Organization.DoesNotExist:
-                # If we get here, the category does not exist.
-                # Go back and render the add category form as a way of saying the category does not exist.
-                return render_to_response('mangement/create_category_form.html',{}, context)
-            page.save()
-            return organization(request, organization_name)
+                return render_to_response('mangement/organization_create_form.html',{}, context)
+            trip = form.save(commit = True)
+
         else:
             print form.errors
     else:
@@ -122,14 +119,13 @@ def OrgDetailView(request,organization_name):
     context_dict['organization_name'] = organization_name
 
     try:
-        # Can we find a category with the given name?
-        # If we can't, the .get() method raises a DoesNotExist exception.
-        # So the .get() method returns one model instance or raises an exception.
         organization = Organization.objects.get(name__iexact=organization_name)
-        context_dict['organization'] =organization
+        context_dict['organization'] = organization
 
-        #pages = Page.objects.filter(category=category).order_by('-views')
-       # context_dict['pages'] = pages
+        trips = Trip.objects.filter(org=organization).order_by('-date')
+        context_dict['trips'] = trips
+        reps = Representative.objects.filter(org=organization)
+        context_dict['reps'] = reps
     except Organization.DoesNotExist:
         pass
 
