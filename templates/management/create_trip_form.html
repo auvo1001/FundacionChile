@@ -1,19 +1,26 @@
-{% extends 'management/base.html' %}
+{% extends 'rango/base.html' %}
 {% block title %}Add new Page{% endblock %}
-{% block content %}
+{% block body_block %}		
 	{% if user.is_authenticated %}
+<<<<<<< HEAD
 	<form id="page_form" method="post" action="/management/organization/{{ organization_name_url }}/create_trip_form/"> {% csrf_token %}
 
   {% for hidden in form.hidden_fields %}
+=======
+	<form id="page_form" method="post" action="/management/organization/{{ category_name }}/create_trip/">
+		{% csrf_token %}
+		{% for hidden in form.hidden_fields %}
+>>>>>>> parent of 0395d08... profile is done-next is create trip
 			{{ hidden }}
 		{% endfor %}
-
+		
 		{% for field in form.visible_fields %}
 			{{ field.errors }}
 			{{ field.help_text }}
 			{{ field }}
+			<br />
+		{% endfor %}
 		<input type="submit" text="submit" value="Add a Trip" />
-
 	</form> 
 	{% else %}
 	please log in first
