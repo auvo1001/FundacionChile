@@ -12,13 +12,9 @@ urlpatterns = patterns('',
     url(r'^logout/$',views.logout_view,name='logout'),
     url(r'^dashboard/$',views.dashboard,name='dashboard'),
     url(r'^organization_create_form/$', views.create_organization, name='organization_create_form'),
-    url(r'^organization/(?P<organization_name>\w+)/create_trip_form/$', views.create_trip, name='create_trip'),
-<<<<<<< HEAD
-
-=======
->>>>>>> parent of 0395d08... profile is done-next is create trip
+    url(r'^organization/(?P<organization_name_url>\w+)/create_trip_form/$', views.create_trip, name='create_trip'),
     url(r'^search/$', views.search, name='search'),
-    url(r'^organization/(?P<organization_name>\w+)/$', views.OrgDetailView, name='org_detail'),
+    url(r'^organization/(?P<organization_name_url>\w+)/$', views.OrgDetailView, name='org_detail'),
 
 
    )

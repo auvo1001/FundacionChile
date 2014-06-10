@@ -78,7 +78,6 @@ def create_organization(request):
         context_dict['form']=form
     return render_to_response('management/organization_create_form.html',context_dict,context)
 
-<<<<<<< HEAD
 def create_trip(request , organization_name_url):
     context = RequestContext(request)
     org_list=get_organization_list()
@@ -86,12 +85,6 @@ def create_trip(request , organization_name_url):
     context_dict['org_list'] = org_list
     organization_name = decode_url(organization_name_url)
 
-=======
-def create_trip(request,organization_name):
-    context = RequestContext(request)
-
-    organization_name = decode_url( organization_name)
->>>>>>> parent of 0395d08... profile is done-next is create trip
     if request.method =='POST':
         form = TripForm(request.POST)
         if form.is_valid():
@@ -100,17 +93,9 @@ def create_trip(request,organization_name):
                 org = Organization.objects.get(name=organization_name)
                 trip.organization = org
             except Organization.DoesNotExist:
-<<<<<<< HEAD
                 return render_to_response('mangement/organization_create_form.html',{}, context)
             trip.save()
             return OrgDetailView(request,organization_name_url)
-=======
-                # If we get here, the category does not exist.
-                # Go back and render the add category form as a way of saying the category does not exist.
-                return render_to_response('mangement/create_category_form.html',{}, context)
-            page.save()
-            return organization(request, organization_name)
->>>>>>> parent of 0395d08... profile is done-next is create trip
         else:
             print form.errors
     else:
@@ -135,9 +120,11 @@ def OrgDetailView(request,organization_name_url):
     context = RequestContext(request)
     organization_name = decode_url(organization_name_url)
     context_dict={}
+    context_dict['organization_name'] = organization_name
+    context_dict['organization_name_url'] = organization_name_url
     org_list = get_organization_list()
     context_dict['org_list'] = org_list
-    context_dict['organization_name'] = organization_name
+
 
     try:
         # Can we find a category with the given name?
@@ -171,7 +158,7 @@ def get_organization_list(max_results=0, starts_with=''):
                 org_list - org_list[:max_results]
 
             for org in org_list:
-                org.url = encode_url(cat.name)
+                org.url = encode_url(org.name)
             return org_list
 
 
