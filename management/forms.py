@@ -19,5 +19,6 @@ class OrganizationForm(forms.ModelForm):
         model = Organization
 
 class TripForm(forms.ModelForm):
+
     class Meta:
         model = Trip

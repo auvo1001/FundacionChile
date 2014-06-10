@@ -2,7 +2,7 @@
 {% block title %}Add new Page{% endblock %}
 {% block content %}
 	{% if user.is_authenticated %}
-	<form id="page_form" method="post" action="/management/organization/{{ organization_name }}/create_trip_form/"> {% csrf_token %}
+	<form id="page_form" method="post" action="/management/organization/{{ organization_name_url }}/create_trip_form/"> {% csrf_token %}
 
   {% for hidden in form.hidden_fields %}
 			{{ hidden }}

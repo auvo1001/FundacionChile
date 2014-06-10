@@ -78,12 +78,15 @@ def create_organization(request):
         context_dict['form']=form
     return render_to_response('management/organization_create_form.html',context_dict,context)
 
-def create_trip(request,organization_name_url):
+def create_trip(request , organization_name_url):
     context = RequestContext(request)
+    org_list=get_organization_list()
+    context_dict={}
+    context_dict['org_list'] = org_list
     organization_name = decode_url(organization_name_url)
+
     if request.method =='POST':
         form = TripForm(request.POST)
-
         if form.is_valid():
             trip = form.save(commit = False)
             try:
@@ -91,16 +94,19 @@ def create_trip(request,organization_name_url):
                 trip.org = organization
             except Organization.DoesNotExist:
                 return render_to_response('mangement/organization_create_form.html',{}, context)
-            trip = form.save(commit = True)
-
+            trip.save()
+            return OrgDetailView(request,organization_name_url)
         else:
             print form.errors
     else:
         form = TripForm()
 
+    context_dict['organization_name_url']= organization_name_url
+    context_dict['organization_name']= organization_name
+    context_dict['form'] = form
+
     return render_to_response('management/create_trip_form.html',
-                              {'organization_name': organization_name,
-                               'form': form},
+                              context_dict,
                               context)
 
 def encode_url(stri):
@@ -110,9 +116,9 @@ def decode_url(stri):
     return stri.replace('_', ' ')
 
 
-def OrgDetailView(request,organization_name):
+def OrgDetailView(request,organization_name_url):
     context = RequestContext(request)
-    organization_name = decode_url(organization_name)
+    organization_name = decode_url(organization_name_url)
     context_dict={}
     org_list = get_organization_list()
     context_dict['org_list'] = org_list
