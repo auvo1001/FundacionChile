@@ -27,7 +27,7 @@ TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
 TEMPLATE_DIRS = (
     TEMPLATE_PATH,
 )
-
+ADMIN_MEDIA_PREFIX = '/media/admin/'
 DATABASE_PATH = os.path.join(PROJECT_PATH, 'fundacionchile.db')
 
 DATABASES = {

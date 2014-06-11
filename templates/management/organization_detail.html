@@ -1,14 +1,86 @@
 
 {% extends 'management/base.html' %}
     {%block content %}
-        <div class="bg-success">
+<div class="container">
+<div class="org">
+    <div class="col-md-12">
+        <div class="profile">
+            <h1>{{ organization.name }}</h1>
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <td>Línea de dirección 1:</td>
+                    <td>{{ organization.address1 }}</td>
+                </tr>
+                <tr>
+                    <td>Línea de dirección 2:</td>
+                    <td>{{ organization.address2 }}</td>
+                </tr>
+                <tr>
+                    <td>Ciudad:</td>
+                    <td>{{ organization.city }}</td>
+                </tr>
+                <tr>
+                    <td>Estado/ Provincia:</td>
+                    <td>{{ organization.state_province }}</td>
+                </tr>
+                <tr>
+                    <td>URL:</td>
+                    <td>{{organization.url }}</td>
+                </tr>
+                <tr>
+                    <td>País:</td>
+                    <td>{{organization.country }}</td>
+                </tr>
+                <tr>
+                    <td>Región:</td>
+                    <td>{{organization.country.region }}</td>
+                </tr>
+                </tbody>
+            </table>
 
-        <h1>{{ organization.name }}</h1>
-        <p>Línea de dirección 1: {{ organization.address1 }}</p>
-        <p>Línea de dirección 2: {{ organization.address2 }}</p>
-        <p>Ciudad: {{ organization.city }}</p>
-        <p>Estado/ Provincia: {{ organization.state_province }}</p>
-        <p>URL: {{organization.url }}</p>
-        <p>País: {{organization.country }}</p>
+            <p><a class="btn btn-primary btn-lg" role="button">Editar</a>   <a class="btn btn-primary btn-lg" role="button">Deletar</a></p>
         </div>
+          </div>
+
+</div>
+<div class="clearfix visible-xs"></div>
+<div class="col-md-6">
+    <div class="rep">
+        <h1>Representante</h1>
+        {% for rep in reps %}
+        <table class="table">
+            <tbody>
+            <tr>
+                <td>Nombre</td>
+                <td>{{rep.FName }}</td>
+            </tr>
+            <tr>
+                <td>Apellido</td>
+                <td>{{rep.LName }}</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>{{rep.email }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <p><a class="btn btn-primary btn-lg" role="button">Añadir nuevo </a></p>
+    </div>
+</div>
+<div class="clearfix visible-xs"></div>
+<div class="col-md-6">
+    <div class="trip">
+        <h1>Viaje</h1>
+        <ol>
+            {% for trip in trips %}
+            <li>{{trip.date }}</li>
+            {% endfor %}
+        </ol>
+        <p><a class="btn btn-primary btn-lg" role="button">Añadir nuevo </a></p>
+    </div>
+</div>
+
+</div>
     {% endblock %}

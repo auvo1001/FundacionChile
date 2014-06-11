@@ -1,6 +1,9 @@
 from django import forms
+from django.contrib.admin import widgets
 from management.models import Organization, User, Trip, Representative
 from django.contrib.auth.models import User
+from functools import partial
+DateInput = partial(forms.DateInput, {'class': 'datepicker'})
 
 class OrganizationForm(forms.ModelForm):
     name = forms.CharField(max_length=255)
@@ -19,6 +22,8 @@ class OrganizationForm(forms.ModelForm):
         model = Organization
 
 class TripForm(forms.ModelForm):
-
+    date = forms.DateField(widget=DateInput())
     class Meta:
         model = Trip
+        fields = ('date',)
+

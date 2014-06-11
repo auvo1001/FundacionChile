@@ -3,8 +3,8 @@ from django.shortcuts import render_to_response, redirect, render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.views.generic.detail import DetailView
-from management.models import Trip, Organization
-from management.forms import OrganizationForm
+from management.models import Trip, Organization, Representative
+from management.forms import OrganizationForm, TripForm
 from django.core.urlresolvers import reverse
 
 def index(request):
@@ -78,24 +78,26 @@ def create_organization(request):
         context_dict['form']=form
     return render_to_response('management/organization_create_form.html',context_dict,context)
 
-def create_trip(request , organization_name_url):
+def create_trip(request,organization_name_url):
     context = RequestContext(request)
-    org_list=get_organization_list()
+    org_list = get_organization_list()
     context_dict={}
     context_dict['org_list'] = org_list
     organization_name = decode_url(organization_name_url)
 
     if request.method =='POST':
         form = TripForm(request.POST)
+
         if form.is_valid():
-            page = form.save(commit = False)
+            created = form.save(commit = False)
             try:
-                org = Organization.objects.get(name=organization_name)
-                trip.organization = org
+                org_name = Organization.objects.get(name = organization_name)
+                created.org = org_name
             except Organization.DoesNotExist:
-                return render_to_response('mangement/organization_create_form.html',{}, context)
-            trip.save()
-            return OrgDetailView(request,organization_name_url)
+                return render_to_response('mangement/organization_create_form.html',context_dict, context)
+
+            created.save()
+            return HttpResponseRedirect(reverse('org_detail', args=(created.org,)))
         else:
             print form.errors
     else:
@@ -103,8 +105,7 @@ def create_trip(request , organization_name_url):
 
     context_dict['organization_name_url']= organization_name_url
     context_dict['organization_name']= organization_name
-    context_dict['form'] = form
-
+    context_dict['form']= form
     return render_to_response('management/create_trip_form.html',
                               context_dict,
                               context)
@@ -127,14 +128,15 @@ def OrgDetailView(request,organization_name_url):
 
 
     try:
-        # Can we find a category with the given name?
-        # If we can't, the .get() method raises a DoesNotExist exception.
-        # So the .get() method returns one model instance or raises an exception.
+
         organization = Organization.objects.get(name__iexact=organization_name)
         context_dict['organization'] =organization
 
-        #pages = Page.objects.filter(category=category).order_by('-views')
-       # context_dict['pages'] = pages
+        trips = Trip.objects.filter(org=organization).order_by('-date')
+        context_dict['trips'] = trips
+
+        reps = Representative.objects.filter(org=organization)
+        context_dict['reps'] = reps
     except Organization.DoesNotExist:
         pass
 
