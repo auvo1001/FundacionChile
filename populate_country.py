@@ -227,7 +227,7 @@ def add_country(name,region):
     return c
 
 if __name__ =='__main__':
-    print "Starting City population script..."
+    print "Starting Country population script..."
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'FundacionChile.settings')
     from management.models import Country
     populate()

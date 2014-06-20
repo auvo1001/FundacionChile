@@ -8,8 +8,9 @@
 
 {% block content %}
         {% if not organization_name_url %}
-			<div style="color: red;">The specified category {{organization_name_url}} does not exist!</div>
+			<div style="color: red;">The specified organization {{organization_name_url}} does not exist!</div>
 		{% else %}
+            <div class="jumbotrona">
         	<form class="span6" id="create_trip_form" method="post" action="/management/organization/{{ organization_name_url }}/create_trip_form/">
 
             	{% csrf_token %}
@@ -17,17 +18,15 @@
             	    {{ hidden }}
             	{% endfor %}
 
-           	{% for field in form.visible_fields %}
-            	    {{ field.errors }}<br/>
-            	    {{ field.help_text}}
-            	    {{ field }}
-            	{% endfor %}
-
+                <label for="date">Fecha: </label>
+                <input class="form-control datepicker" name="date" placeholder="Fecha"  value="" size="100" required autofocus />
+                <input type="submit" text="submit" class="btn btn-primary" value="Añadir Un Viaje" />
                 {% endif %}
-		<input type="submit" text="submit" value="Add a Trip" />
-	</form>
-
+		         <a href="/management/organization/{{ organization_name_url }}/" class="btn btn-danger">Cancelar</a>
+            </form>
+            </div>
 {% endblock %}
+
  {%block script %}
      <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>

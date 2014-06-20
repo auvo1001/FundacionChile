@@ -1,0 +1,29 @@
+{% extends 'management/base.html' %}{{ form.media }}{% load static %}
+{% block title %}Añadir Un Representante{% endblock %}
+
+{% block content %}
+{% if not organization_name_url %}
+<div style="color: red;">The specified category {{organization_name_url}} does not exist!</div>
+{% else %}
+<div class="jumbotrona">
+    <form role="form" method="post" action="/management/organization/{{ organization_name_url }}/create_rep_form/">
+        {% csrf_token %}
+
+
+        <label for="FName">Nombre: </label>
+        <input type="text"  class="form-control" value="" placeholder="Nombre" name="FName" value="" size="100" required autofocus/>
+        <br/>
+        <label for="LName">Apedillo: </label>
+        <input type="text"  class="form-control" value="" placeholder="Apedillo" name="LName" value="" size="100" required autofocus/>
+        <br/>
+        <label for="email">Email: </label>
+        <input type="email"  class="form-control" placeholder="Email" name="email" value="" size="100" required autofocus/>
+        <br/>{% for hidden in form.hidden_fields %}
+        {{ hidden }}
+        {% endfor %}
+        <input type="submit" text="submit" class="btn btn-primary" value="Añadir Un Representante"/>
+        {% endif %}
+        <a href="/management/organization/{{ organization_name_url }}/" class="btn btn-danger">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

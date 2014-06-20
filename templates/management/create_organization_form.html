@@ -1,8 +1,10 @@
-{% extends 'management/base.html' %}
+{% extends 'management/base.html' %}{% load static %}
+
+        {% block title %}Añadir Una Organización{% endblock %}
         {%block content %}
 
-
-<form action="/management/organization_create_form/" role="form" method="post">{% csrf_token %}
+<div class="jumbotrona">
+<form action="/management/create_organization_form/" role="form" method="post">{% csrf_token %}
     <label for="name">Nombre de la organización: </label>
         <input type="text" class="form-control" placeholder="Nombre de la organización" name="name" value="" size="100" required autofocus />
         <br />
@@ -33,6 +35,7 @@
 
     <input type="submit" class="btn btn-primary" value="Submit" />
 </form>
+</div>
 
 
         {% endblock %}

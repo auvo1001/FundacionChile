@@ -1,0 +1,41 @@
+{% extends 'management/base.html' %}{% load static %}
+
+        {% block title %}Editar Organización {{organization.name}} {% endblock %}
+        {%block content %}
+
+<div class="jumbotrona">
+<form action="/management/organization/{{organization_name_url}}/edit/" role="form" method="post">{% csrf_token %}
+    <label for="name">Nombre de la organización: </label>
+        <input type="text" class="form-control" placeholder="{{organization.name}}" name="name" value="{{organization.name}}" size="100" required autofocus />
+        <br />
+
+    <label for="address1">Línea de dirección 1: </label>
+        <input type="text" class="form-control" placeholder="{{organization.address1}}" name="address1" value="{{organization.address1}}" size="100" required autofocus />
+        <br />
+
+    <label for="address2">Línea de dirección 2: </label>
+        <input type="text" class="form-control" placeholder="{{organization.address2}}" name="address2" value="{{organization.address2}}" size="100" required autofocus />
+        <br />
+
+    <label for="city">Ciudad: </label>
+        <input type="text" class="form-control" placeholder="{{organization.city}}" name="city" value="{{organization.city}}" size="100" required autofocus />
+        <br />
+
+    <label for="state_province">Estado/ Provincia: </label>
+        <input type="text" class="form-control" placeholder="{{organization.state_province}}" name="state_province" value="{{organization.state_province}}" size="100" required autofocus />
+        <br />
+
+    <label for="url">URL: </label>
+        <input type="text" class="form-control" placeholder="{{organization.url}}" name="url" value="{{organization.url}}" size="100" required autofocus />
+        <br />
+
+    <label for="country">País: </label> {{ form.country }}
+
+        <br />
+
+    <input type="submit" class="btn btn-primary" value="Submit" />
+</form>
+</div>
+
+
+        {% endblock %}

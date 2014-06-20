@@ -2,8 +2,10 @@
             <li class="active"><a href="/">Home</a></li>
                 {% if user.is_authenticated %}
             <li><a href="/management/logout">Logout</a></li>
+            <li><a href="/management/create_organization_form">Añadir Una Organización</a></li>
                 {% else %}
             <li><a href="/management/login">Login</a></li>
                 {% endif %}
 
           </ul>
+

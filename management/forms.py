@@ -3,12 +3,18 @@ from django.contrib.admin import widgets
 from management.models import Organization, User, Trip, Representative
 from django.contrib.auth.models import User
 from functools import partial
+from django.views.generic.edit import UpdateView
+
+
 DateInput = partial(forms.DateInput, {'class': 'datepicker'})
 
 class OrganizationForm(forms.ModelForm):
     name = forms.CharField(max_length=255)
     url = forms.URLField()
-
+    address1=forms.CharField(max_length=255)
+    address2=forms.CharField(max_length=255)
+    city=forms.CharField(max_length=255)
+    state_province=forms.CharField(max_length=255)
     def clean(self):
         cleaned_data = self.cleaned_data
         url = cleaned_data.get('url')
@@ -27,3 +33,13 @@ class TripForm(forms.ModelForm):
         model = Trip
         fields = ('date',)
 
+class RepForm(forms.ModelForm):
+
+    class Meta:
+        model = Representative
+        fields = ('FName','LName','email',)
+
+class OrgEditForm(forms.ModelForm):
+    model = Organization
+    fields = ['name','country','address1','addres2','city','state_province','url',]
+    template_name = 'edit_organization_form'

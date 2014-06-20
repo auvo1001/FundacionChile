@@ -1,0 +1,6 @@
+<span class="icon-bar"><a href="/">Home</a></span>
+{% if user.is_authenticated %}
+    <span class="icon-bar"><a href="/management/logout">Logout</a></span>
+{% else %}
+    <span class="icon-bar"><a href="/management/login">Login</a>>/span>
+{% endif %}

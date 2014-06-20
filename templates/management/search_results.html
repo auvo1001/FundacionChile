@@ -1,12 +1,22 @@
-<p>You searched for: <strong>{{ query }}</strong></p>
+{% extends 'management/base.html' %}{% load static %}
+        {% block title %}
+        Resultados de la búsqueda: {{ query }}
+        {% endblock %}
+
+        {%block content %}
+<div class="jumbotrona">
+<p>Que ha buscado: <strong>{{ query }}</strong></p>
 
 {% if orgs %}
-    <p>Found {{ orgs|length }} book{{ orgs|pluralize }}.</p>
+    <p>Hay {{ orgs|length }} Organización {{ orgs|pluralize }}.</p>
     <ul>
         {% for org in orgs %}
-        <li><a href="/management/{{org.id}}/">{{ org.name }}</a></li>
+        <li><a href="/management/organization/{{org.url}}/">{{ org.name }}</a></li>
         {% endfor %}
     </ul>
 {% else %}
-    <p>No orgs matched your search criteria.</p>
+    <p>Ninguna organización corresponde a sus criterios de búsqueda</p>
 {% endif %}
+</div>
+
+        {% endblock %}

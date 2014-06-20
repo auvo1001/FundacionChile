@@ -105,6 +105,10 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
+DATE_FORMAT = ( 'Y-m-d')
+
+
+
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '@=encizj75z29=vduq$n$4plo#_e(xmykkzt3i=za0iuv%dpca'
 

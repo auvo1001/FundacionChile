@@ -18,6 +18,8 @@ class Organization(models.Model):
     city = models.CharField( max_length=128)
     state_province = models.CharField(max_length=128, blank=True)
     url = models.URLField(blank=True)
+    added = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def get_absolute_url(self):
         return reverse('org-detail', kwargs={'pk': self.pk})
@@ -30,6 +32,8 @@ class Representative(models.Model):
     LName = models.CharField(max_length=255)
     email = models.EmailField(max_length=75)
     org = models.ForeignKey(Organization)
+    added = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return '%s %s' % (self.FName, self.LName)
@@ -37,6 +41,8 @@ class Representative(models.Model):
 class Trip(models.Model):
     date = models.DateField(auto_now=False, auto_now_add=False)
     org = models.ForeignKey(Organization)
+    added = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return '%s %s' % (self.date, self.org)

@@ -1,14 +1,12 @@
-<html>
-<head>
-    <title>Search</title>
-</head>
-<body>
+
     {% if error %}
-        <p style="color: red;">Please submit a search term.</p>
+        <p style="color: red;">Por favor, envíe un término de búsqueda.</p>
     {% endif %}
-    <form action="/management/search/" method="get">
-        <input type="text" name="q">
-        <input type="submit" value="Search">
-    </form>
-</body>
-</html>
+
+            <form class="navbar-form navbar-right" action="/management/search/" method="get" role="form">
+            <div class="form-group">
+              <input type="text" name="q" placeholder="Search" class="form-control">
+            </div>
+            <input type="submit" class="btn btn-primary" value="Search">
+
+</form>

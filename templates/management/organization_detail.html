@@ -1,5 +1,7 @@
-
 {% extends 'management/base.html' %}
+
+        {% block title %}  Detalle de la {{organization_name}}
+        {% endblock %}
     {%block content %}
 <div class="container">
 <div class="org">
@@ -26,7 +28,7 @@
                 </tr>
                 <tr>
                     <td>URL:</td>
-                    <td>{{organization.url }}</td>
+                    <td><a href="{{organization.url }}" />{{organization.url }}</td>
                 </tr>
                 <tr>
                     <td>País:</td>
@@ -39,7 +41,7 @@
                 </tbody>
             </table>
 
-            <p><a class="btn btn-primary btn-lg" role="button">Editar</a>   <a class="btn btn-primary btn-lg" role="button">Deletar</a></p>
+            <p><a class="btn btn-primary btn-lg" role="button" href="/management/organization/{{organization_name_url}}/edit">Editar</a>
         </div>
           </div>
 
@@ -66,7 +68,7 @@
             {% endfor %}
             </tbody>
         </table>
-        <p><a class="btn btn-primary btn-lg" role="button">Añadir nuevo </a></p>
+        <p><a class="btn btn-primary btn-lg" href="/management/organization/{{organization_name_url}}/create_rep_form/" role="button">Añadir nuevo </a></p>
     </div>
 </div>
 <div class="clearfix visible-xs"></div>
@@ -78,7 +80,7 @@
             <li>{{trip.date }}</li>
             {% endfor %}
         </ol>
-        <p><a class="btn btn-primary btn-lg" role="button">Añadir nuevo </a></p>
+        <p><a class="btn btn-primary btn-lg" href="/management/organization/{{organization_name_url}}/create_trip_form/" role="button">Añadir nuevo </a></p>
     </div>
 </div>
 
