@@ -8,7 +8,7 @@
             {% if latest_org_list %}
                 <ul>
                 {% for org in latest_org_list %}
-                    <li><a href="/management/organization/{{ org.url }}">{{ org.name }} by {{org.country }} {{org.country.region }}</a></li>
+                    <li><a href="/management/organization/{{ org.url }}">{{ org.name }} : {{org.country }} {{org.country.region }}</a></li>
                 {% endfor %}
                 </ul>
             {% else %}
@@ -23,7 +23,7 @@
             {% if latest_trip_list %}
                 <ul>
                 {% for trip in latest_trip_list %}
-                    <li><a href="">{{ trip.date }} by {{trip.org }}</a></li>
+                    <li><a href="">{{ trip.date }} - {{trip.org }}</a></li>
                 {% endfor %}
                 </ul>
             {% else %}
